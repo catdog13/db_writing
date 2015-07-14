@@ -4,8 +4,8 @@ db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\un-watched_statu
 
 db_name = 'Movies'
 table = db[db_name]
-with_mp4 = table.find_one(id=1)
-print(with_mp4)
-data = dict(movie_name='10 Years')
-table.update(data, 1)
-print(with_mp4)
+for x in range(360, 369):
+    with_mp4 = table.find_one(id=x)['filename']
+    without_mp4 = with_mp4[:-4]
+    data = dict(id=x, movie_name=without_mp4)
+    table.update(data, ['id'])
