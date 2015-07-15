@@ -1,7 +1,7 @@
 from imdbpie import Imdb
 import dataset
 imdb = Imdb()
-db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\imdb_search\\video_list.db')
+db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\db_writing\\video_list.db')
 db_name = 'Movies'
 table = db[db_name]
 

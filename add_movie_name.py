@@ -1,6 +1,6 @@
 import dataset
 
-db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\un-watched_status\\video_list.db')
+db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\db_writing\\video_list.db')
 
 db_name = 'Movies'
 table = db[db_name]

@@ -2,7 +2,7 @@ import os
 import dataset
 import time
 from imdbpie import Imdb
-# db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\un-watched_status\\video_list.db')
+# db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\db_writing\\video_list.db')
 db = dataset.connect('sqlite:///C:\\Users\Tom\\video_list.db')
 imdb = Imdb()
 
