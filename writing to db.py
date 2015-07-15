@@ -35,8 +35,7 @@ def folder_crawler(path_to_craw, unwatched, drop, add_id):
             else:
                 if table.find_one(filename=file_name) is None:
                     table.insert(dict(filename=file_name, path=dir_path,
-                                      file_size=(str(round(file_size_bytes, 2)) + ' GB'), status=view_status,
-                                      movie_name=without_mp4))
+                                      file_size=(str(round(file_size_bytes, 2)) + ' GB'), status=view_status))
 
     def start_file_op():
             folder = path_to_craw
