@@ -31,9 +31,12 @@ def folder_crawler(path_to_craw):
             if table.find_one(movie_name=without_mp4) is None:
                 movie = imdb.search_for_title(without_mp4)
                 movie_id = movie[0]['imdb_id']
-                table.insert(dict(path=file_path,
-                                  file_size=(str(round(file_size_bytes, 2)) + ' GB'), status=view_status,
-                                  movie_name=without_mp4, imdb_id=movie_id, length=get_length(file_path)))
+                table.insert(dict(movie_name=without_mp4,
+                                  status=view_status,
+                                  imdb_id=movie_id,
+                                  length=get_length(file_path),
+                                  file_size=(str(round(file_size_bytes, 2)) + ' GB'),
+                                  path=file_path))
 
     def start_file_op():
             folder = path_to_craw
