@@ -1,4 +1,8 @@
 import subprocess
+import dataset
+db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\db_writing\\video_list.db')
+db_name = 'Movies'
+table = db[db_name]
 
 
 def get_length(filename):
@@ -8,4 +12,13 @@ def get_length(filename):
             movie_length = (x[12:23])
             return str(movie_length)[2:-4]
 
-print(get_length(r'E:\\Movies\\5 to 7 (2014)\\5 to 7.mp4'))
+
+def write_to_db():
+    for x in range(51, 369):
+        movie_name = table.find_one(id=x)['path']
+        movie_length = get_length(movie_name)
+        data = dict(id=x, length=movie_length)
+        table.update(data, ['id'])
+
+if __name__ == '__main__':
+    write_to_db()
