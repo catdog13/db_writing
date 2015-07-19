@@ -1,4 +1,5 @@
 import dataset
+
 db = dataset.connect('sqlite:///C:\\Users\Tom\\video_list.db')
 table = db['Movies']
 

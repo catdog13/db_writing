@@ -19,7 +19,7 @@ def get_view_status(status):
 
 def get_movie_size(path):
     file_size = os.path.getsize(path)
-    file_size_bytes = file_size/1073741824
+    file_size_bytes = file_size / 1073741824
     return str(round(file_size_bytes, 2)) + ' GB'
 
 
