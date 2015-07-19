@@ -84,7 +84,7 @@ def writer(file_name, movie_path, table):
                     release_date=get_movie_release_date(json_file),
                     plot=get_movie_plot(json_file),
                     movie_name=movie_name,
-                    status=get_view_status(False),
+                    status=get_view_status(True),
                     path=movie_path,
                     )
         table.insert(data)
