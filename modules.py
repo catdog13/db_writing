@@ -45,7 +45,7 @@ def get_movie_id(json_file):
     return movie_id
 
 
-def get_movie_rating(json_file):
+def get_movie_imdb_rating(json_file):
     rating = json_file['imdbRating']
     movie_rating = rating + "/10"
     return movie_rating
@@ -78,7 +78,7 @@ def writer(file_name, movie_path, table):
         data = dict(imdb_id=get_movie_id(json_file),
                     file_size=get_movie_size(movie_path),
                     runtime=get_runtime(json_file),
-                    rating=get_movie_rating(json_file),
+                    imdb_rating=get_movie_imdb_rating(json_file),
                     genre=get_movie_genre(json_file),
                     mpaa_rating=get_movie_mpaa_rating(json_file),
                     release_date=get_movie_release_date(json_file),
@@ -97,7 +97,7 @@ def update(table, x):
     data = dict(id=x, imdb_id=get_movie_id(json_file),
                 file_size=get_movie_size(movie_path),
                 runtime=get_runtime(json_file),
-                rating=get_movie_rating(json_file),
+                imdb_rating=get_movie_imdb_rating(json_file),
                 genre=get_movie_genre(json_file),
                 mpaa_rating=get_movie_mpaa_rating(json_file),
                 release_date=get_movie_release_date(json_file),
