@@ -1,7 +1,7 @@
 import dataset
 from modules import *
 
-db = dataset.connect('sqlite:///C:\\Users\Tom\\video_list.db')
+db = dataset.connect('sqlite:///db_files\\video_list.db')
 table = db['Movies']
 
 
