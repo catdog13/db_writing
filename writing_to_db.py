@@ -2,7 +2,7 @@ import os
 import dataset
 import time
 from modules import writer
-db = dataset.connect('sqlite:///db_files\\video_list.db')
+db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\db_writing\\db_files\\video_list.db')
 
 
 def folder_crawler(path_to_craw):
