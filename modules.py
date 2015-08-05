@@ -71,6 +71,11 @@ def get_movie_plot(json_file):
     return movie_plot
 
 
+def get_actors(json_file):
+    actors = json_file['Actors']
+    return actors
+
+
 def writer(file_name, movie_path, table):
     if table.find_one(path=movie_path) is None:
         movie_name = file_name[:-4]
@@ -86,6 +91,7 @@ def writer(file_name, movie_path, table):
                     movie_name=movie_name,
                     status=get_view_status(True),
                     path=movie_path,
+                    actors=get_actors(json_file)
                     )
         table.insert(data)
 
@@ -101,6 +107,7 @@ def update(table, x):
                 genre=get_movie_genre(json_file),
                 mpaa_rating=get_movie_mpaa_rating(json_file),
                 release_date=get_movie_release_date(json_file),
-                plot=get_movie_plot(json_file)
+                plot=get_movie_plot(json_file),
+                actors=get_actors(json_file)
                 )
     table.update(data, ['id'])
