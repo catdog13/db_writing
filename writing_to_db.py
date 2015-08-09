@@ -2,7 +2,7 @@ import os
 import dataset
 import time
 from modules import writer
-db = dataset.connect('sqlite:///C:\\Users\Tom\\PycharmProjects\\db_writing\\db_files\\video_list.db')
+db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db')
 
 
 def folder_crawler(path_to_craw):
@@ -21,4 +21,4 @@ def folder_crawler(path_to_craw):
     print(db_name + " Was Done In " + str(round((time.time() - start_time), 2)) + " seconds")
 
 
-folder_crawler(r"E:\Movies")
+folder_crawler(r"D:\Movies")

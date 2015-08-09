@@ -31,7 +31,8 @@ def get_movie_year(path):
 
 def get_json(movie_name, year):
     movie_name = movie_name.replace('&', '%26')
-    json_file = requests.get('http://www.omdbapi.com/?t=' + movie_name + '&y=' + year + '&plot=short&r=json')
+    json_file = requests.get('http://www.omdbapi.com/?t=' + movie_name + '&y=' +
+                             year + '&plot=short&r=json&tomatoes=true')
     return json_file.json()
 
 
@@ -76,24 +77,19 @@ def get_actors(json_file):
     return actors
 
 
-def writer(file_name, movie_path, table):
-    if table.find_one(path=movie_path) is None:
-        movie_name = file_name[:-4]
-        json_file = get_json(movie_name, get_movie_year(movie_path))
-        data = dict(imdb_id=get_movie_id(json_file),
-                    file_size=get_movie_size(movie_path),
-                    runtime=get_runtime(json_file),
-                    imdb_rating=get_movie_imdb_rating(json_file),
-                    genre=get_movie_genre(json_file),
-                    mpaa_rating=get_movie_mpaa_rating(json_file),
-                    release_date=get_movie_release_date(json_file),
-                    plot=get_movie_plot(json_file),
-                    movie_name=movie_name,
-                    status=get_view_status(True),
-                    path=movie_path,
-                    actors=get_actors(json_file)
-                    )
-        table.insert(data)
+def get_tomato_rating(json_file):
+    rating = json_file['tomatoMeter']
+    return rating
+
+
+def get_length(table):
+    length = len(table) + 1
+    return length
+
+
+def get_blank(json_file):
+    blank = json_file['Blank']
+    return blank
 
 
 def update(table, x):
@@ -108,6 +104,29 @@ def update(table, x):
                 mpaa_rating=get_movie_mpaa_rating(json_file),
                 release_date=get_movie_release_date(json_file),
                 plot=get_movie_plot(json_file),
-                actors=get_actors(json_file)
+                actors=get_actors(json_file),
+                tomato_rating=get_tomato_rating(json_file)
                 )
     table.update(data, ['id'])
+
+
+def writer(file_name, movie_path, table):
+    if table.find_one(path=movie_path) is None:
+        movie_name = file_name[:-4]
+        json_file = get_json(movie_name, get_movie_year(movie_path))
+        data = dict(id=get_length(table),
+                    imdb_id=get_movie_id(json_file),
+                    file_size=get_movie_size(movie_path),
+                    runtime=get_runtime(json_file),
+                    imdb_rating=get_movie_imdb_rating(json_file),
+                    genre=get_movie_genre(json_file),
+                    mpaa_rating=get_movie_mpaa_rating(json_file),
+                    release_date=get_movie_release_date(json_file),
+                    plot=get_movie_plot(json_file),
+                    movie_name=movie_name,
+                    status=get_view_status(True),
+                    path=movie_path,
+                    actors=get_actors(json_file),
+                    tomato_rating=get_tomato_rating(json_file)
+                    )
+        table.insert(data)
