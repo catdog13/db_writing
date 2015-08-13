@@ -63,7 +63,10 @@ def get_movie_mpaa_rating(json_file):
 
 
 def get_movie_release_date(json_file):
-    movie_release_date = json_file['Released']
+    movie_release = json_file['Released']
+    release_year = movie_release[-4:]
+    release_month = movie_release[3:][:4]
+    movie_release_date = release_year + ' ' + release_month
     return movie_release_date
 
 
