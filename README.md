@@ -16,3 +16,7 @@ updates a single movie's metadata
 Backbone for whole operation
 each part of the metadata gets is own function
 add the column and call the function in the updater and writer functions
+
+#### Requires
+[requests](https://pypi.python.org/pypi/requests)
+[dataset](https://pypi.python.org/pypi/dataset)
