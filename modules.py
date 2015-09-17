@@ -74,6 +74,10 @@ class ForMovies:
         rating = self.json_file['tomatoMeter']
         return rating
 
+    def get_response(self):
+        response = self.json_file['Response']
+        return response
+
     def get_length(self):
         length = len(self.table) + 1
         return length
@@ -96,24 +100,26 @@ class ForMovies:
 
     def writer(self):
         if self.table.find_one(path=self.movie_path) is None:
-            movie_name = self.movie_name
             self.get_json()
-            data = dict(id=self.get_length(),
-                        imdb_id=self.get_movie_id(),
-                        file_size=self.get_movie_size(),
-                        runtime=self.get_runtime(),
-                        imdb_rating=self.get_movie_imdb_rating(),
-                        genre=self.get_movie_genre(),
-                        mpaa_rating=self.get_movie_mpaa_rating(),
-                        release_date=self.get_movie_release_date(),
-                        plot=self.get_movie_plot(),
-                        movie_name=movie_name,
-                        status=self.get_view_status(),
-                        path=self.movie_path,
-                        actors=self.get_actors(),
-                        tomato_rating=self.get_tomato_rating()
-                        )
-            self.table.insert(data)
+            if self.get_response() == 'True':
+                data = dict(id=self.get_length(),
+                            imdb_id=self.get_movie_id(),
+                            file_size=self.get_movie_size(),
+                            runtime=self.get_runtime(),
+                            imdb_rating=self.get_movie_imdb_rating(),
+                            genre=self.get_movie_genre(),
+                            mpaa_rating=self.get_movie_mpaa_rating(),
+                            release_date=self.get_movie_release_date(),
+                            plot=self.get_movie_plot(),
+                            movie_name=self.movie_name,
+                            status=self.get_view_status(),
+                            path=self.movie_path,
+                            actors=self.get_actors(),
+                            tomato_rating=self.get_tomato_rating()
+                            )
+                self.table.insert(data)
+            else:
+                print(self.movie_name + ' Not Found')
 
 
 class ForTv:

@@ -1,7 +1,12 @@
 import modules
 
-path = 'E:\Movies\300 Rise of an Empire (2014)\300 Rise of an Empire.mp4'
-movie_name = '300: Rise of an Empire'
-json_file = modules.get_json(movie_name, modules.get_movie_year(path))
-output = modules.get_movie_id(json_file)
-print(output)
+movie_path = 'D:\Movies\Teen Lust (2015)\Teen Lust.mp4'
+movie_name = 'Teen Lust'
+statement = modules.ForMovies(movie_name, movie_path, None).get_response()
+print(statement)
+if statement == 'True':
+    print('Found')
+elif statement == 'False':
+    print('Not Found')
+else:
+    print('Done messed up')
