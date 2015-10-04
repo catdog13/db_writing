@@ -30,4 +30,4 @@ def folder_crawler(path_to_craw):
 
 if __name__ == '__main__':
     folder_crawler(r'D:\Movies')
-    folder_crawler(r'D:\TV')
+    # folder_crawler(r'D:\TV')
