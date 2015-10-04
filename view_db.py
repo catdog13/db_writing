@@ -8,8 +8,7 @@ class MainRun(object):
     def index(self):
         return 'Why are you here'
 
-    @cherrypy.expose
-    def name(self):
+    def make_list(self, sort):
         body = ["""<html>
                 <head>
                 <style>
@@ -37,7 +36,7 @@ class MainRun(object):
                 <th>path</th>
                 <th>actors</th>
                 </tr>"""]
-        result = db.query('SELECT * FROM Movies ORDER BY movie_name')
+        result = db.query('SELECT * FROM Movies ORDER BY ' + sort)
         for row in result:
             new_row = """<tr>
                          <td>""" + row['movie_name'] + """</td>
@@ -57,6 +56,21 @@ class MainRun(object):
             body.append(new_row)
         body.append('</table></body></html>')
         return body
+
+    @cherrypy.expose
+    def name(self):
+        func = self.make_list('movie_name')
+        return func
+
+    @cherrypy.expose
+    def id(self):
+        func = self.make_list('_rowid_')
+        return func
+
+    @cherrypy.expose
+    def status(self):
+        func = self.make_list('status')
+        return func
 
 if __name__ == '__main__':
     cherrypy.server.socket_host = '192.168.1.21'
