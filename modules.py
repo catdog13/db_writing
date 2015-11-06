@@ -72,7 +72,11 @@ class ForMovies:
 
     def get_tomato_rating(self):
         rating = self.json_file['tomatoMeter']
-        return rating
+        if rating == 'N/A':
+            format_rating = 'N/A'
+        else:
+            format_rating = ("{0:0=3d}".format(int(rating)))
+        return format_rating
 
     def get_response(self):
         response = self.json_file['Response']

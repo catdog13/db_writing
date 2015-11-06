@@ -6,11 +6,28 @@ db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_wr
 class MainRun(object):
     @cherrypy.expose
     def index(self):
-        return 'Why are you here'
+        body = ["""<html>
+                <head>
+                    <title>Home</title>
+                </head>
+                <body>
+                    <h1>Sort Options</h1>
+                    <p>Click the sort order</p>
+                    <ul>
+                        <li><a href="http://home.catdog13.com:8080/movies/name">name</a></li>
+                        <li><a href="http://home.catdog13.com:8080/movies/id">id</a></li>
+                        <li><a href="http://home.catdog13.com:8080/movies/status">status</a></li>
+                        <li><a href="http://home.catdog13.com:8080/movies/rating">rating</a></li>
+                        <li><a href="http://home.catdog13.com:8080/movies/imdb_rating">imdb_rating</a></li>
+                    </ul>
+                </body>
+                </html>"""]
+        return body
 
     def make_list(self, sort):
         body = ["""<html>
                 <head>
+                    <title>""" + sort + """</title>
                 <style>
                     table, td, th {
                         border-collapse: collapse;
@@ -70,6 +87,16 @@ class MainRun(object):
     @cherrypy.expose
     def status(self):
         func = self.make_list('status')
+        return func
+
+    @cherrypy.expose
+    def rating(self):
+        func = self.make_list('tomato_rating')
+        return func
+
+    @cherrypy.expose
+    def imdb_rating(self):
+        func = self.make_list('imdb_rating')
         return func
 
 if __name__ == '__main__':
