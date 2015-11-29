@@ -1,12 +1,16 @@
-import modules
+import dataset
+db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db')
 
-movie_path = 'D:\Movies\Teen Lust (2015)\Teen Lust.mp4'
-movie_name = 'Teen Lust'
-statement = modules.ForMovies(movie_name, movie_path, None).get_response()
-print(statement)
-if statement == 'True':
-    print('Found')
-elif statement == 'False':
-    print('Not Found')
-else:
-    print('Done messed up')
+
+def path_changer():
+    table = db['Movies']
+    for x in range(1, 467):
+        old_path = table.find_one(id=x)['path']
+        new_path = old_path.replace('D:\\', 'E:\\')
+        data = dict(id=x,
+                    path=new_path)
+        table.update(data, ['id'])
+
+
+if __name__ == '__main__':
+    path_changer()
