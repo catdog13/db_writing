@@ -5,7 +5,7 @@ db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_wr
 db_name = 'Movies'
 table = db[db_name]
 lower = 1
-upper = len(table) + 1
+upper = len(table) + 501
 
 for x in range(lower, upper):
     movie_path = table.find_one(id=x)['path']
