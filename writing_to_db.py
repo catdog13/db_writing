@@ -13,11 +13,14 @@ def folder_crawler(path_to_craw):
     def file_walker():
         if path_to_craw.endswith('Movies'):
             table = db[db_name]
+            path_list = []
+            for paths in table['path']:
+                path_list.append(paths['path'])
             for root, subdir, files in os.walk(path_to_craw):
                 for file in files:
                     if file.endswith('.mp4'):
                         full_path = os.path.join(root, file)
-                        modules.ForMovies(file[:-4], full_path, table).writer()
+                        modules.ForMovies(file[:-4], full_path, table, path_list).writer()
         elif path_to_craw.endswith('TV'):
             db[db_name].drop()
             table = db[db_name]

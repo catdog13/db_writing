@@ -3,10 +3,11 @@ import requests
 
 
 class ForMovies:
-    def __init__(self, movie_name, movie_path, table):
+    def __init__(self, movie_name, movie_path, table, path_table):
         self.movie_name = movie_name
         self.movie_path = movie_path
         self.table = table
+        self.path_table = path_table
     json_file = {}
     status = True
 
@@ -29,8 +30,10 @@ class ForMovies:
 
     def get_json(self):
         movie_name = self.movie_name.replace('&', '%26')
-        json_file = requests.get('http://www.omdbapi.com/?t=' + movie_name + '&y=' +
-                                 self.get_movie_year() + '&plot=short&r=json&tomatoes=true')
+        movie_name = movie_name.replace(' ', '%')
+        url = 'http://www.omdbapi.com/?t=' + movie_name + '&y=' + \
+              self.get_movie_year() + '&plot=short&r=json&tomatoes=true'
+        json_file = requests.get(url)
         self.json_file = json_file.json()
         return json_file.json()
 
@@ -103,7 +106,7 @@ class ForMovies:
         self.table.update(data, ['id'])
 
     def writer(self):
-        if self.table.find_one(path=self.movie_path) is None:
+        if self.movie_path not in self.path_table:
             self.get_json()
             if self.get_response() == 'True':
                 data = dict(id=self.get_length(),

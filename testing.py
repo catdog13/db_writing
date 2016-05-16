@@ -1,16 +1,17 @@
 import dataset
 db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db')
+table = db['Movies']
 
 
-def path_changer():
-    table = db['Movies']
-    for x in range(1, 467):
-        old_path = table.find_one(id=x)['path']
-        new_path = old_path.replace('D:\\', 'E:\\')
-        data = dict(id=x,
-                    path=new_path)
-        table.update(data, ['id'])
-
+def find_path():
+    path_list = []
+    for paths in table['path']:
+        path_list.append(paths['path'])
+    movie = 'E:\Movies\+1 (2013)\+1.mp4'
+    if movie not in path_list:
+        print('false')
+    elif movie in path_list:
+        print('true')
 
 if __name__ == '__main__':
-    path_changer()
+    find_path()
