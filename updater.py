@@ -12,6 +12,6 @@ for x in range(lower, upper):
     print('id is ' + str(x))
     movie_path = table.find_one(id=x)['path']
     movie_name = table.find_one(id=x)['movie_name']
-    modules.ForMovies(movie_name, movie_path, table).update(x)
+    modules.ForMovies(movie_name, movie_path, table, None).update(x)
     print(movie_name + ' is done')
     sleep(1)
