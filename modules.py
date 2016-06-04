@@ -30,9 +30,11 @@ class ForMovies:
 
     def get_json(self):
         movie_name = self.movie_name.replace('&', '%26')
+        movie_name = movie_name.replace('+', '%2B')
         movie_name = movie_name.replace(' ', '+')
         url = 'http://www.omdbapi.com/?t=' + movie_name + '&y=' + \
               self.get_movie_year() + '&plot=short&r=json&tomatoes=true'
+        # print('"' + url + '"')
         json_file = requests.get(url)
         self.json_file = json_file.json()
         return json_file.json()
