@@ -1,5 +1,6 @@
 import os
 import requests
+from urllib.parse import quote_plus
 
 
 class ForMovies:
@@ -29,12 +30,10 @@ class ForMovies:
         return movie_year[0]
 
     def get_json(self):
-        movie_name = self.movie_name.replace('&', '%26')
-        movie_name = movie_name.replace('+', '%2B')
-        movie_name = movie_name.replace(' ', '+')
-        url = 'http://www.omdbapi.com/?t=' + movie_name + '&y=' + \
-              self.get_movie_year() + '&plot=short&r=json&tomatoes=true'
-        # print('"' + url + '"')
+        movie_name = quote_plus(self.movie_name)
+        url = 'http://www.omdbapi.com/?t={0}&y={1}&plot=short&r=json&tomatoes=true'\
+            .format(movie_name, self.get_movie_year())
+        print(url)
         json_file = requests.get(url)
         self.json_file = json_file.json()
         return json_file.json()
