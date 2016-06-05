@@ -9,13 +9,15 @@ def status_update():
     movie_id = movie['id']
     status_current = movie['status']
     data = dict()
+    new_status = ''
     if status_current == 'Unwatched':
+        new_status = 'is now marked Watched'
         data = dict(id=movie_id, status='Watched')
     elif status_current == 'Watched':
+        new_status = 'is now marked Unwatched'
         data = dict(id=movie_id, status='Unwatched')
-    else:
-        print("it didn't work")
     table.update(data, ['id'])
+    print('{0} {1}'.format(movie_name, new_status))
 
 if __name__ == '__main__':
     while True:
