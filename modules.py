@@ -33,7 +33,7 @@ class ForMovies:
         movie_name = quote_plus(self.movie_name)
         url = 'http://www.omdbapi.com/?t={0}&y={1}&plot=short&r=json&tomatoes=true'\
             .format(movie_name, self.get_movie_year())
-        print(url)
+        # print(url)
         json_file = requests.get(url)
         self.json_file = json_file.json()
         return json_file.json()
