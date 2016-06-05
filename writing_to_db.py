@@ -28,7 +28,8 @@ def folder_crawler(path_to_craw):
                 modules.ForTv(shows.name, table).writer()
 
     file_walker()
-    print(db_name + ' Was Done In ' + str(round((time.time() - start_time), 2)) + ' seconds')
+    end_time = str(round((time.time() - start_time), 2))
+    print('{0} Was done in {1} seconds'.format(db_name, end_time))
 
 
 if __name__ == '__main__':
