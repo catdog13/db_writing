@@ -24,7 +24,8 @@ class MainRun(object):
                 </html>"""]
         return body
 
-    def make_list(self, sort):
+    @staticmethod
+    def make_list(sort):
         body = ["""<html>
                 <head>
                     <title>""" + sort + """</title>
@@ -53,7 +54,7 @@ class MainRun(object):
                 <th>path</th>
                 <th>actors</th>
                 </tr>"""]
-        result = db.query('SELECT * FROM Movies ORDER BY ' + sort)
+        result = db['Movies'].find(order_by=sort)
         for row in result:
             new_row = """<tr>
                          <td>""" + row['movie_name'] + """</td>
