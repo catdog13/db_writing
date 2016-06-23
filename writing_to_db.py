@@ -2,7 +2,8 @@ import os
 import dataset
 import time
 import modules
-db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db')
+db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
+db = dataset.connect('sqlite:///{}'.format(db_file))
 
 
 def folder_crawler(path_to_craw):
@@ -20,7 +21,8 @@ def folder_crawler(path_to_craw):
                 for file in files:
                     if file.endswith('.mp4'):
                         full_path = os.path.join(root, file)
-                        modules.ForMovies(os.path.splitext(file)[0], full_path, table, path_list).writer()
+                        file_name = os.path.splitext(file)[0]
+                        modules.ForMovies(file_name, full_path, table, path_list).writer()
         elif path_to_craw.endswith('TV'):
             db[db_name].drop()
             table = db[db_name]
