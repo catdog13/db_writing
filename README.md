@@ -18,5 +18,5 @@ each part of the metadata gets is own function
 add the column and call the function in the updater and writer functions
 
 #### Requires
-[requests](https://pypi.python.org/pypi/requests)
+[requests](https://pypi.python.org/pypi/requests)  
 [dataset](https://pypi.python.org/pypi/dataset)
