@@ -2,8 +2,10 @@ import os
 import dataset
 import time
 import modules
+
+dj_db_file = 'C:\\Users\\Tom\\Documents\\Python_Projects\\django_website\\db.sqlite3'
 db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
-db = dataset.connect('sqlite:///{}'.format(db_file))
+db = dataset.connect('sqlite:///{}'.format(dj_db_file))
 
 
 def folder_crawler(path_to_craw):
@@ -13,10 +15,10 @@ def folder_crawler(path_to_craw):
 
     def file_walker():
         if path_to_craw.endswith('Movies'):
-            table = db[db_name]
+            table = db['movies_moviedb']
             path_list = []
-            for paths in table['path']:
-                path_list.append(paths['path'])
+            for paths in table['movie_path']:
+                path_list.append(paths['movie_path'])
             for root, subdir, files in os.walk(path_to_craw):
                 for file in files:
                     if file.endswith('.mp4'):

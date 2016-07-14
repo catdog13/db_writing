@@ -1,11 +1,13 @@
 import dataset
 
+dj_db_file = 'C:\\Users\\Tom\\Documents\\Python_Projects\\django_website\\db.sqlite3'
+db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
+db = dataset.connect('sqlite:///{}'.format(dj_db_file))
 
-db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db')
-table = db['Movies']
+table = db['movies_moviedb']
+
 db_mem = dataset.connect('sqlite:///:memory:')
 small_files_list = db_mem['list']
-
 
 for movie in table:
     if float(movie['file_size'][:-3]) < 3:

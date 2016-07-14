@@ -1,7 +1,10 @@
 import dataset
 from urllib.parse import quote_plus
-db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db')
-table = db['Movies']
+dj_db_file = 'C:\\Users\\Tom\\Documents\\Python_Projects\\django_website\\db.sqlite3'
+db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
+db = dataset.connect('sqlite:///{}'.format(dj_db_file))
+
+table = db['movies_moviedb']
 
 
 def url_phrasing_test():

@@ -2,9 +2,12 @@ import dataset
 import modules
 from time import sleep
 
-db = dataset.connect('sqlite:///C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db')
-db_name = 'Movies'
-table = db[db_name]
+dj_db_file = 'C:\\Users\\Tom\\Documents\\Python_Projects\\django_website\\db.sqlite3'
+db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
+db = dataset.connect('sqlite:///{}'.format(dj_db_file))
+
+table = db['movies_moviedb']
+
 lower = 202
 upper = len(table) + 45
 

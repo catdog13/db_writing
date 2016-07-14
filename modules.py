@@ -9,6 +9,7 @@ class ForMovies:
         self.movie_path = movie_path
         self.table = table
         self.path_table = path_table
+
     json_file = {}
     status = True
 
@@ -31,7 +32,7 @@ class ForMovies:
 
     def get_json(self):
         movie_name = quote_plus(self.movie_name)
-        url = 'http://www.omdbapi.com/?t={0}&y={1}&plot=short&r=json&tomatoes=true'\
+        url = 'http://www.omdbapi.com/?t={0}&y={1}&plot=short&r=json&tomatoes=true' \
             .format(movie_name, self.get_movie_year())
         # print(url)
         json_file = requests.get(url)
@@ -121,7 +122,7 @@ class ForMovies:
                             plot=self.get_movie_plot(),
                             movie_name=self.movie_name,
                             status=self.get_view_status(),
-                            path=self.movie_path,
+                            movie_path=self.movie_path,
                             actors=self.get_actors(),
                             tomato_rating=self.get_tomato_rating()
                             )
@@ -134,6 +135,7 @@ class ForTv:
     def __init__(self, series_name, table):
         self.series_name = series_name.split(' - ')[0]
         self.table = table
+
     json_file = {}
     status = True
 
