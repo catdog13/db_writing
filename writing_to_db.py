@@ -3,9 +3,12 @@ import dataset
 import time
 import modules
 
-dj_db_file = 'C:\\Users\\Tom\\Documents\\Python_Projects\\django_website\\db.sqlite3'
-db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
-db = dataset.connect('sqlite:///{}'.format(dj_db_file))
+# dj_db_file = 'C:\\Users\\Tom\\Documents\\Python_Projects\\django_website\\db.sqlite3'
+# db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
+# db = dataset.connect('sqlite:///{}'.format(dj_db_file))
+
+db = dataset.connect('postgresql://djangodb:djangodbuser@catdog13.com:5432/django_website')
+# movies = db['movies_moviedb'].all()
 
 
 def folder_crawler(path_to_craw):
