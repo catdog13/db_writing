@@ -21,5 +21,5 @@ def folder_crawler(path_to_craw):
     db.commit()
 
 if __name__ == '__main__':
-#    folder_crawler(r'I:\Movies')
+    # folder_crawler(r'I:\Movies')
     folder_crawler(r'/media/tom/arrrrrrrrr/Movies')

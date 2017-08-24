@@ -1,14 +1,9 @@
 import os
-import dataset
 import time
-import modules
+import requests
+import datetime
 
-# dj_db_file = 'C:\\Users\\Tom\\Documents\\Python_Projects\\django_website\\db.sqlite3'
-# db_file = 'C:\\Users\\Tom\Documents\\Python_Projects\\db_writing\\db_files\\video_list.db'
-# db = dataset.connect('sqlite:///{}'.format(dj_db_file))
-
-db = dataset.connect('postgresql://djangodb:djangodbuser@catdog13.com:5432/django_website')
-# movies = db['movies_moviedb'].all()
+api_key = '3d56ad21150323764ca7cf7ebcf26ccc'
 
 
 def folder_crawler(path_to_craw):
@@ -16,23 +11,42 @@ def folder_crawler(path_to_craw):
     db_name = path_to_craw[3:]
     print(db_name + ' Starting')
 
+    def add_movie(path):
+        creation_time = os.path.getctime(path)
+        creation_date = datetime.date.fromtimestamp(creation_time)
+        file_size = os.path.getsize(path)
+
+        post_data = {'api_key': api_key,
+                     'path': path,
+                     'size': file_size,
+                     'age': creation_date}
+        response = requests.post('http://127.0.0.1:8000/movies/add/', data=post_data)
+        content = response.json()
+        if content['Added'] == 'True':
+            return True
+        elif content['Added'] == 'False':
+            return False, content['Error']
+        else:
+            return False
+
+    def get_paths():
+        path_list = []
+        url = 'http://127.0.0.1:8000/movies/paths/'
+        json = requests.get(url).json()
+        for path in json:
+            path_list.append(path['path'])
+        return path_list
+
     def file_walker():
-        if path_to_craw.endswith('Movies'):
-            table = db['movies_moviedb']
-            path_list = []
-            for paths in table['movie_path']:
-                path_list.append(paths['movie_path'])
+            path_list = get_paths()
             for root, subdir, files in os.walk(path_to_craw):
                 for file in files:
                     if file.endswith('.mp4'):
                         full_path = os.path.join(root, file)
-                        file_name = os.path.splitext(file)[0]
-                        modules.ForMovies(file_name, full_path, table, path_list).writer()
-        elif path_to_craw.endswith('TV'):
-            db[db_name].drop()
-            table = db[db_name]
-            for shows in os.scandir(path_to_craw):
-                modules.ForTv(shows.name, table).writer()
+                        if full_path not in path_list:
+                            print('starting ' + full_path)
+                            print(add_movie(full_path))
+                            time.sleep(7)
 
     file_walker()
     end_time = str(round((time.time() - start_time), 2))
