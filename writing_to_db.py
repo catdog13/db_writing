@@ -7,10 +7,6 @@ api_key = '3d56ad21150323764ca7cf7ebcf26ccc'
 
 
 def folder_crawler(path_to_craw):
-    start_time = time.time()
-    db_name = path_to_craw[3:]
-    print(db_name + ' Starting')
-
     def add_movie(path):
         creation_time = os.path.getctime(path)
         creation_date = datetime.date.fromtimestamp(creation_time)
@@ -20,7 +16,7 @@ def folder_crawler(path_to_craw):
                      'path': path,
                      'size': file_size,
                      'age': creation_date}
-        response = requests.post('http://127.0.0.1:8000/movies/add/', data=post_data)
+        response = requests.post('http://catdog13.com/movies/add/', data=post_data)
         content = response.json()
         if content['Added'] == 'True':
             return True
@@ -31,7 +27,7 @@ def folder_crawler(path_to_craw):
 
     def get_paths():
         path_list = []
-        url = 'http://127.0.0.1:8000/movies/paths/'
+        url = 'http://catdog13.com/movies/paths/'
         json = requests.get(url).json()
         for path in json:
             path_list.append(path['path'])
@@ -46,12 +42,9 @@ def folder_crawler(path_to_craw):
                         if full_path not in path_list:
                             print('starting ' + full_path)
                             print(add_movie(full_path))
-                            time.sleep(7)
+                            time.sleep(10)
 
     file_walker()
-    end_time = str(round((time.time() - start_time), 2))
-    print('{0} Was done in {1} seconds'.format(db_name, end_time))
-
 
 if __name__ == '__main__':
     folder_crawler(r'E:\Movies')
